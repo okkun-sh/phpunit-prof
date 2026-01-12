@@ -1,0 +1,37 @@
+{
+    "name": "okkun-sh/phpunit-prof",
+    "description": "PHPUnit extension for profiling test execution times with JSON and HTML reports",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "phpunit",
+        "testing",
+        "profiler",
+        "performance",
+        "test-performance"
+    ],
+    "authors": [
+        {
+            "name": "okkun-sh"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "phpunit/phpunit": "^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "OkkunSh\\PhpunitProf\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OkkunSh\\PhpunitProf\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

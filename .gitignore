@@ -1,0 +1,7 @@
+/vendor/
+/.phpunit.cache/
+/phpunit-prof.json
+/phpunit-prof.html
+/coverage/
+composer.lock
+.DS_Store
