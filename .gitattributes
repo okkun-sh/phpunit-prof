@@ -4,3 +4,4 @@
 /phpstan.neon export-ignore
 /.gitignore export-ignore
 /.gitattributes export-ignore
+/.tagpr export-ignore
