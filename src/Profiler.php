@@ -13,6 +13,8 @@ use OkkunSh\PhpunitProf\Storage\TestResult;
 
 final class Profiler
 {
+    public const DEFAULT_THRESHOLD = 0.5;
+
     /** @var array<string, HRTime> */
     private array $startTimes = [];
 
@@ -22,8 +24,8 @@ final class Profiler
     private ?ProfileData $previousData = null;
 
     public function __construct(
-        private string $outputPath,
-        private float $threshold = 0.5,
+        private ?string $outputPath = null,
+        private float $threshold = self::DEFAULT_THRESHOLD,
         private ?string $htmlOutput = null,
         private ?string $compareWith = null
     ) {
@@ -72,8 +74,10 @@ final class Profiler
     {
         $profileData = new ProfileData($this->results);
 
-        $jsonReporter = new JsonReporter();
-        $jsonReporter->save($profileData, $this->outputPath);
+        if ($this->outputPath !== null) {
+            $jsonReporter = new JsonReporter();
+            $jsonReporter->save($profileData, $this->outputPath);
+        }
 
         if ($this->htmlOutput !== null) {
             $htmlReporter = new HtmlReporter();
@@ -127,7 +131,10 @@ final class Profiler
         }
 
         echo "\n";
-        echo "Report saved to: {$this->outputPath}\n";
+
+        if ($this->outputPath !== null) {
+            echo "Report saved to: {$this->outputPath}\n";
+        }
 
         if ($this->htmlOutput !== null) {
             echo "HTML report saved to: {$this->htmlOutput}\n";
