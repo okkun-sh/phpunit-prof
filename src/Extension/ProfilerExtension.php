@@ -23,16 +23,16 @@ final class ProfilerExtension implements Extension
         Facade $facade,
         ParameterCollection $parameters
     ): void {
-        $outputPath = $this->getParameter($parameters, 'output', 'phpunit-prof.json');
-        $threshold = $this->getParameter($parameters, 'threshold', 0.5);
+        $outputPath = $this->getParameter($parameters, 'output', null);
+        $threshold = $this->getParameter($parameters, 'threshold', Profiler::DEFAULT_THRESHOLD);
         $htmlOutput = $this->getParameter($parameters, 'html-output', null);
         $compareWith = $this->getParameter($parameters, 'compare-with', null);
 
         $profiler = new Profiler(
-            outputPath: is_string($outputPath) ? $outputPath : 'phpunit-prof.json',
+            outputPath: is_string($outputPath) ? $outputPath : null,
             threshold: is_float($threshold) ? $threshold : (float) $threshold,
-            htmlOutput: is_string($htmlOutput) || $htmlOutput === null ? $htmlOutput : null,
-            compareWith: is_string($compareWith) || $compareWith === null ? $compareWith : null
+            htmlOutput: is_string($htmlOutput) ? $htmlOutput : null,
+            compareWith: is_string($compareWith) ? $compareWith : null
         );
 
         $facade->registerSubscriber(new TestPreparedListener($profiler));

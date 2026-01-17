@@ -4,11 +4,11 @@ PHPUnit extension for profiling test execution times with JSON and HTML reports.
 
 ## Features
 
+- Zero configuration required
 - Profile test execution times automatically
 - Generate JSON and HTML reports
 - Identify slow tests based on configurable threshold
 - Compare with previous test runs
-- Zero configuration required
 
 ## Requirements
 
@@ -43,19 +43,29 @@ Add the extension to your `phpunit.xml`:
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `output` | string | `phpunit-prof.json` | Path to JSON report file |
+| `output` | string | `null` | Path to JSON report file (optional) |
 | `html-output` | string | `null` | Path to HTML report file (optional) |
 | `threshold` | float | `0.5` | Threshold in seconds for slow tests |
 | `compare-with` | string | `null` | Path to previous JSON report for comparison |
 
-### Example with All Options
+### Example: Console Output Only (for CI)
+
+```xml
+<extensions>
+    <bootstrap class="OkkunSh\PhpunitProf\Extension\ProfilerExtension">
+        <!-- Default: console output only, no files generated -->
+    </bootstrap>
+</extensions>
+```
+
+### Example: With All Options
 
 ```xml
 <extensions>
     <bootstrap class="OkkunSh\PhpunitProf\Extension\ProfilerExtension">
         <parameter name="output" value="reports/phpunit-prof.json"/>
         <parameter name="html-output" value="reports/phpunit-prof.html"/>
-        <parameter name="threshold" value="0.5"/>
+        <parameter name="threshold" value="0.3"/>
         <parameter name="compare-with" value="reports/previous.json"/>
     </bootstrap>
 </extensions>
